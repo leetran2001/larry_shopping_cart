@@ -1,0 +1,10 @@
+
+Has agregado los siguiente productos a tu carro:
+<ol>
+  <% @orders.each do |order| %>
+    <li><%= order.product.name %></li>
+  <% end %>
+</ol>
+
+<%= link_to 'Volver', products_path, class: 'btn btn-info' %>
+
