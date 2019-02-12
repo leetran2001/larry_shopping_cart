@@ -5,4 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :orders
   has_many :products, through: :orders
+
+  def cart
+    orders.where(paid: false)
+  end
+  
+  
 end

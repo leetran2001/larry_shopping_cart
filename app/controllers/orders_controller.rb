@@ -7,21 +7,18 @@ class OrdersController < ApplicationController
       paid: false
     )
     @order.quantity += 1
+    @order.price = @order.product.price
     @order.save
     redirect_to cart_orders_path, notice: 'Producto agregado al carro!'
   end
 
   def cart
-    # Refactor
-    @orders = current_user.orders.where(paid: false)
-
-    sub_totals = @orders.map { |order| order.product.price * order.quantity }
-
-    @total = sub_totals.sum
+    @orders = current_user.cart
+    @total = @orders.map { |order| order.product.price * order.quantity }.sum
   end
 
   def empty_cart
-    @orders = current_user.orders.where(paid: false)
+    @orders = current_user.cart
     @orders.destroy_all
     redirect_to cart_orders_path, notice: 'Carro vaciado con éxito!'
   end
@@ -38,8 +35,5 @@ class OrdersController < ApplicationController
     @order.destroy
     redirect_to cart_orders_path, notice: 'Producto eliminado del carro'
   end
-  
-  
-  
   
 end
