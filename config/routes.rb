@@ -4,7 +4,13 @@ Rails.application.routes.draw do
     resources :orders, only: :create
   end
 
-  get 'cart', to: 'orders#cart', as: 'cart'
+  resources :orders, only: [:destroy] do
+    patch 'remove_one_item'
+    collection do
+      get 'cart'
+      delete 'empty_cart'
+    end
+  end
 
   root 'products#index'
 

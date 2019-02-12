@@ -7,7 +7,7 @@
     <ul class="navbar-nav ml-auto">
       <% if user_signed_in?%>
       <li class="nav-item">
-        <a href="<%= cart_path %>" class="nav-link">
+        <a href="<%= cart_orders_path %>" class="nav-link">
           <i class="fas fa-shopping-cart"></i> <%= current_user.orders.count %>
         </a>
       </li>

@@ -1,5 +1,10 @@
 
 <% if @orders.any? %>
+  <br>
+  <%= link_to empty_cart_orders_path, class: 'btn btn-danger', method: :delete do %>
+    <i class="fas fa-trash"></i>
+  <% end %>
+  <br><br>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -8,6 +13,7 @@
         <th>Price</th>
         <th>Quantity</th>
         <th>Subtotal</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -16,12 +22,27 @@
           <td><%= order.product.id %></td>
           <td><%= order.product.name %></td>
           <td><%= order.product.price %></td>
-          <td><%= order.quantity %></td>
+          <td>
+            <% if order.quantity > 1 %>
+              <%= link_to order_remove_one_item_path(order.id), method: :patch do %>
+               <i class="far fa-minus-square"></i>
+              <% end %>
+            <% end %>
+            <%= order.quantity %>
+            <%= link_to product_orders_path(order.product.id), method: :post do %>
+              <i class="fas fa-plus-square"></i>
+            <% end %>
+          </td>
           <td><%= order.product.price * order.quantity %></td>
+          <td>
+            <%= link_to order_path(order.id), method: :delete do %>
+              <i class="fas fa-times-circle"></i>
+            <% end %>
+          </td>
         </tr>
       <% end %>
       <tr>
-        <td></td><td></td><td></td>
+        <td></td><td></td><td></td><td></td>
         <td class="text-right"><strong>TOTAL:</strong></td>
         <td><strong><%= @total %></strong></td>
       </tr>
@@ -35,5 +56,5 @@
 
  
 
-<%= link_to 'Volver', products_path, class: 'btn btn-info' %>
+<%= link_to 'Back', products_path, class: 'btn btn-info' %>
 
