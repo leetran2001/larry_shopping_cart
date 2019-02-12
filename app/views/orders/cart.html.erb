@@ -1,10 +1,39 @@
 
-Has agregado los siguiente productos a tu carro:
-<ol>
-  <% @orders.each do |order| %>
-    <li><%= order.product.name %></li>
-  <% end %>
-</ol>
+<% if @orders.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.product.id %></td>
+          <td><%= order.product.name %></td>
+          <td><%= order.product.price %></td>
+          <td><%= order.quantity %></td>
+          <td><%= order.product.price * order.quantity %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td></td><td></td><td></td>
+        <td class="text-right"><strong>TOTAL:</strong></td>
+        <td><strong><%= @total %></strong></td>
+      </tr>
+    </tbody>
+  </table>
+<% else %>
+  No tienes productos en el carro... <br><br>  
+<% end %>
+
+
+
+ 
 
 <%= link_to 'Volver', products_path, class: 'btn btn-info' %>
 

@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Products</h1>
+<h1 class="text-center">Products</h1>
 
 <div class="row">
   <% @products.each do |product|  %>
-    <div class="card col-sm-3 text-center">
+    <div class="card col-sm-3 text-center p-3">
       <img class="card-img-top img-fluid" src="<%= product.photo %>" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title"><%= product.name %></h5>
