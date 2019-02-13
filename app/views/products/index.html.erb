@@ -10,6 +10,13 @@
         <h5 class="card-title"><%= product.name %></h5>
         <h6 class="card-title">$<%= product.price %></h6>
         <%= link_to 'Add to Cart', product_orders_path(product.id), class: 'btn btn-primary', method: :post %>
+        <%= link_to product_wishlists_path(product.id), method: :post do %>
+          <% if current_user.wishlists.pluck(:product_id).include? product.id %>
+            <i class="fas fa-star" style="font-size: 1.5rem;"></i>
+          <% else %>
+            <i class="far fa-star" style="font-size: 1.5rem;"></i>
+          <% end %>
+        <% end %>
       </div>
     </div>
   <% end %>

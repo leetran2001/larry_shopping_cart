@@ -35,5 +35,19 @@ class OrdersController < ApplicationController
     @order.destroy
     redirect_to cart_orders_path, notice: 'Producto eliminado del carro'
   end
+
+  def buy
+    current_user.cart.update_all(paid: true)
+    redirect_to root_path, notice: 'Pago efectuado con éxito!'
+  end
+
+  def bought_products
+    @orders = current_user.orders.where(paid: true)
+  end
   
+
+  # current_user.cart.total_items
+  # ... es lo mismo que...
+  # current_user.orders.where(paid: false).pluck(:quantity).sum
+
 end
