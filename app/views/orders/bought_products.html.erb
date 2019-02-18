@@ -17,13 +17,13 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.id %></td>
+        <td><%= order.billing.code %></td>
         <td><%= order.product.id %></td>
         <td><%= order.product.name %></td>
         <td><%= order.quantity %></td>
         <td><%= order.price %></td>
         <td><%= order.price * order.quantity %></td>
-        <td><%= time_ago_in_words(order.created_at) %> ago..</td>
+        <td><%= order.billing.created_at.strftime('%d/%m/%Y at %H:%M') %></td>
       </tr>
     <% end %>
   </tbody>

@@ -16,6 +16,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :billings, only: [] do
+    collection do
+      post 'pre_pay'
+      get 'execute'
+    end
+  end
+
   get 'bought_products', to: 'orders#bought_products', as: 'bought_products'
 
   root 'products#index'

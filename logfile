@@ -1,0 +1,9 @@
+LOG:  database system was interrupted; last known up at 2019-02-15 12:33:47 -03
+LOG:  database system was not properly shut down; automatic recovery in progress
+LOG:  invalid record length at 0/979D90D0: wanted 24, got 0
+LOG:  redo is not required
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  column "billing" of relation "orders" does not exist at character 36
+STATEMENT:  UPDATE "orders" SET "paid" = TRUE, "billing" = 1 WHERE "orders"."user_id" = $1 AND "orders"."paid" = $2

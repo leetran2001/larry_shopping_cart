@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_13_144713) do
+ActiveRecord::Schema.define(version: 2019_02_18_153437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "billings", force: :cascade do |t|
+    t.string "code"
+    t.string "payment_method"
+    t.string "currency"
+    t.integer "amount"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_billings_on_user_id"
+  end
 
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
@@ -23,6 +34,8 @@ ActiveRecord::Schema.define(version: 2019_02_13_144713) do
     t.datetime "updated_at", null: false
     t.integer "quantity", default: 0
     t.integer "price"
+    t.bigint "billing_id"
+    t.index ["billing_id"], name: "index_orders_on_billing_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -56,6 +69,8 @@ ActiveRecord::Schema.define(version: 2019_02_13_144713) do
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 
+  add_foreign_key "billings", "users"
+  add_foreign_key "orders", "billings"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "wishlists", "products"
