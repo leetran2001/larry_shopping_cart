@@ -16,7 +16,7 @@ permit_params :email, :password
 
 filter :email, as: :select
 filter :email
-filter :email, as: :select
+#filter :email, as: :select
 
 
 index do
